@@ -1,4 +1,30 @@
 <?php
+require "./db.php";
+$message = "";
+if (
+    isset($_POST["titre"]) &&
+    isset($_POST["annee"]) &&
+    isset($_POST["image"])
+) {
+    $titre = $_POST["titre"];
+    $annee = $_POST["annee"];
+    $image = $_POST["image"];
+    $sql = "INSERT INTO film (titre, annee, image) VALUES (:titre, :annee, :image)"; // requête préparée
+    $statement = $connection->prepare($sql);
+    if ($statement->execute(
+            [
+                ":titre" => $titre,
+                ":annee" => $annee,
+                ":image" => $image
+            ]
+        )
+    ) {
+        $message = "<p class=\"text-center mb-0\">Film ajouté 😎</p>";
+    };
+}
+?>
+
+<?php
 include "./head.php";
 ?>
 
@@ -13,6 +39,13 @@ include "./head.php";
 <div class="container mb-5">
     <div class="row rowItem p-5">
         <div class="col-10 offset-1">
+            
+            <?php if(!empty($message)): ?>
+                <div class="alert alert-light text-center" role="alert">
+                    <?= $message; ?>
+                </div>
+            <?php endif;?>     
+
             <form method="post">
                 <div class="mb-3">
                     <label>Titre</label>
