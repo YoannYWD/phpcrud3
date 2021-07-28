@@ -13,8 +13,8 @@ CREATE TABLE film
 /* AJOUT DE FILM */
 INSERT INTO film (titre, annee, image)
 VALUES 
-("L'Etrange Noël de Mr JACK", "1993-12-24", "/images/noel.jpg"),
-("Cobra", "1986-06-10", "/images/cobra.jpg"),
+("L'Etrange Noël de Mr JACK", "1993-12-24", "images/noel.jpg"),
+("Cobra", "1986-06-10", "images/cobra.jpg"),
 ("Interstellar", "2014-11-07", "images/interstellar.jpg");
 
 /* EDITER LE FILM */

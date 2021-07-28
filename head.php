@@ -24,7 +24,7 @@
                 <a class="nav-link" aria-current="page" href="/phpcrud3">Accueil</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="/phpcrud3/edit.php">Ajouter un film</a>
+                <a class="nav-link" href="/phpcrud3/create.php">Ajouter un film</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/phpcrud3/db.php">DB</a>

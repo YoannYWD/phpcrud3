@@ -19,7 +19,7 @@ include "./head.php";
 </div>
 
 <div class="container mb-5">
-    <div class="row rowTable">
+    <div class="row rowItem">
         <div class="col-10 offset-1">
         <table class="table">
             <thead>
