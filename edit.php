@@ -29,7 +29,7 @@ if (
     if(in_array($ext, $allowed_ext)) {
 
         if(move_uploaded_file($file_temp, $path)) {
-            $sql = "INSERT INTO film (titre, annee, image) VALUES (:titre, :annee, :image)"; // requête préparée
+            $sql = "UPDATE film SET titre=:titre, annee=:annee, image=:image WHERE id=:id"; // requête préparée
             $statement = $connection->prepare($sql);
             if ($statement->execute(
                     [
@@ -88,7 +88,7 @@ include "./head.php";
                     <input name="image" type="file" class="form-control-file">
                 </div>
 
-                <button type="submit" class="btn btn-light">Ajouter</button>
+                <button type="submit" class="btn btn-light">Mettre à jour</button>
             </form>
         </div>
     </div>
