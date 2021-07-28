@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(75, 109, 143);
+}
+
+nav {
+    background-color: rgb(116, 151, 180);
+}
+
+h1 {
+    color: #FFFFFF;
+}
+
+.rowTable {
+    background-color: rgb(116, 151, 180);
+}
+
+button {
+    margin-right: 10px;
+}

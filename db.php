@@ -8,7 +8,7 @@ $password = "Arinfo/2021";
 $options = [];
 $connection = new PDO($dsn, $username, $password, $options); // connection en instance de PDO
 try { // fonction d'exception
-    print "Connexion réussie 😎";
+    print "<p class=\"mb-0\" style=\"color: #FFFFFF; font-style: italic;\">Connexion réussie 😎</p>";
 } catch(PDOException $e) { //fonction qui permet d'afficher le message d'erreur si try ne fonctionne pas
     print "error : " . $e->getMessage();
     die();
