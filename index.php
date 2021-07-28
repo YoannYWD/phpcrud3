@@ -39,8 +39,8 @@ include "./head.php";
                 <td><?= $film->annee ?></td>
                 <td><img src="<?= $film->image ?>" width="200px"></td>
                 <td>
-                    <button type="button" class="btn btn-light margin-right-2">Editer</button>
-                    <button type="button" class="btn btn-light">Supprimer</button></td>
+                    <a href="edit.php?id=<?= $film->id ?>" type="button" class="btn btn-light margin-right-2">Editer</a>
+                    <a type="button" class="btn btn-light">Supprimer</a></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
