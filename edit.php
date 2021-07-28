@@ -39,7 +39,7 @@ if (
                     ]
                 )
             ) {
-                $message = "<p class=\"text-center mb-0\">Film ajouté 😎</p>";
+                $message = "<p class=\"text-center mb-0\">Film modifié 😎</p>";
             }
 
         }
@@ -76,13 +76,14 @@ include "./head.php";
             <form method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label>Titre</label>
-                    <input name="titre" type="text" class="form-control">
+                    <input name="titre" type="text" class="form-control" value="<?= $film->titre ?>">
                 </div>
                 <div class="mb-3">
                     <label>Date de sortie</label>
-                    <input name="annee" type="date" class="form-control">
+                    <input name="annee" type="date" class="form-control" value="<?= $film->annee ?>">
                 </div>
                 <div class="mb-3">
+                    <img src="<?= $film->image ?>" width="75px">
                     <label for="exampleFormControlFile1">Choisissez un fichier : </label>
                     <input name="image" type="file" class="form-control-file">
                 </div>
