@@ -4,23 +4,41 @@ $message = "";
 if (
     isset($_POST["titre"]) &&
     isset($_POST["annee"]) &&
-    isset($_POST["image"])
+    isset($_FILES["image"])
 ) {
     $titre = $_POST["titre"];
     $annee = $_POST["annee"];
-    $image = $_POST["image"];
-    $sql = "INSERT INTO film (titre, annee, image) VALUES (:titre, :annee, :image)"; // requête préparée
-    $statement = $connection->prepare($sql);
-    if ($statement->execute(
-            [
-                ":titre" => $titre,
-                ":annee" => $annee,
-                ":image" => $image
-            ]
-        )
-    ) {
-        $message = "<p class=\"text-center mb-0\">Film ajouté 😎</p>";
+
+    // IMAGE
+    $file_name = $_FILES["image"]["name"]; // pour écrire dans la base de données
+    $file_temp = $_FILES["image"]["tmp_name"]; // pour déplacer le fichier
+    $allowed_ext = ["jpg", "jpeg", "gif", "png"]; // extensions autorisées
+    $exp = explode(".", $file_name); // on décompose le nom du fichier image
+    $ext = end($exp); // on prend la dernière valeur du explode précédent, qui sera forcément l'extension
+    $path = "images/" . $file_name; // variable qui écrit le chemin de stockage de l'image
+
+    if(in_array($ext, $allowed_ext)) {
+
+        if(move_uploaded_file($file_temp, $path)) {
+            $sql = "INSERT INTO film (titre, annee, image) VALUES (:titre, :annee, :image)"; // requête préparée
+            $statement = $connection->prepare($sql);
+            if ($statement->execute(
+                    [
+                        ":titre" => $titre,
+                        ":annee" => $annee,
+                        ":image" => $path
+                    ]
+                )
+            ) {
+                $message = "<p class=\"text-center mb-0\">Film ajouté 😎</p>";
+            }
+
+        }
+
+    } else {
+        $message = "<p class=\text-start mb-0\" style=\"color:red;\">Ce fichier n'est pas une image. 😡</p>";
     };
+    
 }
 ?>
 
@@ -46,7 +64,7 @@ include "./head.php";
                 </div>
             <?php endif;?>     
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label>Titre</label>
                     <input name="titre" type="text" class="form-control">
@@ -56,8 +74,8 @@ include "./head.php";
                     <input name="annee" type="date" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label>Affiche</label>
-                    <input name="image" type="form" class="form-control">
+                    <label for="exampleFormControlFile1">Choisissez un fichier : </label>
+                    <input name="image" type="file" class="form-control-file">
                 </div>
 
                 <button type="submit" class="btn btn-light">Ajouter</button>
