@@ -1,5 +1,14 @@
 <?php
 require "./db.php";
+
+// RECUPERE LA FICHE DU FILM
+$id = $_GET["id"];
+$sql = "SELECT * FROM film WHERE id = :id";
+$statement = $connection->prepare($sql);
+$statement->execute([":id" => $id]);
+$film = $statement->fetch(PDO::FETCH_OBJ);
+//var_dump($film);
+
 $message = "";
 if (
     isset($_POST["titre"]) &&
