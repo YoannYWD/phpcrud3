@@ -1,5 +1,9 @@
 <?php 
 require "./db.php";
+$sql = "SELECT * FROM film;";
+$statement = $connection->prepare($sql); // statement en instance de connexion = récupère toutes ses fonctionnalités
+$statement->execute();
+$films = $statement->fetchAll(PDO::FETCH_OBJ); // méthode fetchAll pour renvoyer les données sous format objet
 ?>
 
 <?php
@@ -14,7 +18,7 @@ include "./head.php";
     </div>
 </div>
 
-<div class="container">
+<div class="container mb-5">
     <div class="row rowTable">
         <div class="col-10 offset-1">
         <table class="table">
@@ -28,15 +32,17 @@ include "./head.php";
                 </tr>
             </thead>
             <tbody>
+                <?php foreach($films as $film): // $film est une variable locale?>
                 <tr>
-                <th scope="row">1</th>
-                <td>Interstellar</td>
-                <td>2014</td>
-                <td><img src="./images/interstellar.jpg" width="200px"></td>
+                <th scope="row"><?= $film->id ?></th>
+                <td><?= $film->titre ?></td>
+                <td><?= $film->annee ?></td>
+                <td><img src="<?= $film->image ?>" width="200px"></td>
                 <td>
                     <button type="button" class="btn btn-light margin-right-2">Editer</button>
                     <button type="button" class="btn btn-light">Supprimer</button></td>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
             </table>
         </div>
